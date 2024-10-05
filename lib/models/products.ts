@@ -23,7 +23,7 @@ const ProductSchema = new mongoose.Schema(
       },
     },
     createdAt: { type: Date, default: Date.now },
-    updateAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
   },
   { toJSON: { getters: true } }
 );
