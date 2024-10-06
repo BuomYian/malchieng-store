@@ -1,13 +1,13 @@
-import React from "react";
 import { CldUploadWidget } from "next-cloudinary";
-import { Button } from "../ui/button";
 import { Plus, Trash } from "lucide-react";
+
+import { Button } from "../ui/button";
 import Image from "next/image";
 
 interface ImageUploadProps {
   value: string[];
-  onChange: (value: string[]) => void;
-  onRemove: (value: string[]) => void;
+  onChange: (value: string) => void;
+  onRemove: (value: string) => void;
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
@@ -15,8 +15,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   onRemove,
   value,
 }) => {
-  // Use onSuccess instead of onUpload if onUpload is deprecated
-  const handleUploadSuccess = (result: any) => {
+  const onUpload = (result: any) => {
     onChange(result.info.secure_url);
   };
 
@@ -24,9 +23,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     <div>
       <div className="mb-4 flex flex-wrap items-center gap-4">
         {value.map((url) => (
-          <div className="relative w-[200px] h-[200px]" key={url}>
+          <div key={url} className="relative w-[200px] h-[200px]">
             <div className="absolute top-0 right-0 z-10">
               <Button
+                type="button"
                 onClick={() => onRemove(url)}
                 size="sm"
                 className="bg-red-1 text-white"
@@ -43,13 +43,15 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           </div>
         ))}
       </div>
-      <CldUploadWidget
-        uploadPreset="ekh7ucq9"
-        onSuccess={handleUploadSuccess} // Update this to the new event handler
-      >
+
+      <CldUploadWidget uploadPreset="myyu6boo" onSuccess={onUpload}>
         {({ open }) => {
           return (
-            <Button onClick={() => open()} className="bg-grey-1 text-white">
+            <Button
+              type="button"
+              onClick={() => open()}
+              className="bg-grey-1 text-white"
+            >
               <Plus className="h-4 w-4 mr-2" />
               Upload Image
             </Button>
