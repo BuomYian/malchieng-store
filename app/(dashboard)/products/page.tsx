@@ -40,6 +40,7 @@ const Products = () => {
       <div className="flex items-center justify-between">
         <p className="text-heading2-bold">Products</p>
         <Button
+          type="button"
           className="bg-blue-1 text-white"
           onClick={() => router.push("/products/new")}
         >
